@@ -1318,7 +1318,8 @@ export class MysqlQueryRunner extends BaseQueryRunner implements QueryRunner {
                 oldColumn.name = newColumn.name
             }
 
-            if (this.isColumnChanged(oldColumn, newColumn, true, true)) {
+            if (this.isColumnChanged(oldColumn, newColumn, true, true) ||
+            oldColumn.length !== newColumn.length) {
                 upQueries.push(
                     new Query(
                         `ALTER TABLE ${this.escapePath(table)} CHANGE \`${
